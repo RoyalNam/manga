@@ -28,3 +28,21 @@ body {
 .bg-yellow {
     background-color: var(--yellow-color);
 }
+/*  */
+
+.bg-linear {
+    background: linear-gradient(0deg, #000 25%, transparent);
+}
+.bg-linear-black {
+    background: linear-gradient(90deg, #000, transparent);
+}
+.bg-linear-red:hover {
+    background-color: #5d0914;
+    border-color: #5d0914;
+}
+.bg-linear-red-row {
+    background: linear-gradient(90deg, #5d0914, rgba(93, 9, 20, 0));
+}
+.bg-linear-red2 {
+    background: linear-gradient(90deg, rgba(220, 9, 20, 0.5), rgba(220, 9, 20, 0));
+}
