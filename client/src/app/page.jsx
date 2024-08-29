@@ -18,19 +18,25 @@ const Home = () => {
         const loadMangaData = async () => {
             setLoading(true);
             try {
-                const updateMangaData = await mangaApi.getMangaList(8, undefined, ['ongoing'], undefined);
+                const updateMangaData = await mangaApi.getMangaList({ limit: 8, status: ['ongoing'] });
                 setUpdateMangaList(updateMangaData);
 
-                const completeMangaData = await mangaApi.getMangaList(8, undefined, ['completed'], undefined);
+                const completeMangaData = await mangaApi.getMangaList({ limit: 8, status: ['completed'] });
                 setCompleteMangaList(completeMangaData);
 
-                const topMangaData = await mangaApi.getMangaList(10, undefined, undefined, {
-                    followedCount: 'desc',
+                const topMangaData = await mangaApi.getMangaList({
+                    limit: 10,
+                    order: {
+                        followedCount: 'desc',
+                    },
                 });
                 setTopMangaList(topMangaData);
 
-                const newMangaData = await mangaApi.getMangaList(8, undefined, undefined, {
-                    year: 'desc',
+                const newMangaData = await mangaApi.getMangaList({
+                    limit: 8,
+                    order: {
+                        year: 'desc',
+                    },
                 });
                 setNewMangaList(newMangaData);
             } catch (error) {
@@ -41,6 +47,13 @@ const Home = () => {
         };
         loadMangaData();
     }, []);
+
+    if (loading)
+        return (
+            <div>
+                <img src='/loading-96.png' alt='' className='mx-auto animate-spin' />
+            </div>
+        );
 
     return (
         <MainLayout>

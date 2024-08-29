@@ -3,8 +3,9 @@ const mangaBaseUrl = '/manga';
 export const mangaEndpoints = {
     getMangaList: mangaBaseUrl,
     getMangaDetails: (mangaId) => `${mangaBaseUrl}/${mangaId}`,
-    getRandomManga: `${mangaBaseUrl}/random`,
+    getRandomManga: () => `${mangaBaseUrl}/random`,
     getChapters: (mangaId) => `${mangaBaseUrl}/${mangaId}/aggregate`,
+    getTag: () => `${mangaBaseUrl}/tag`,
 };
 
 export const additionalEndpoints = {

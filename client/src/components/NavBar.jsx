@@ -1,8 +1,8 @@
 'use client';
 import React, { useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { FaOutdent, FaXmark } from 'react-icons/fa6';
 import Link from 'next/link';
+import { FaOutdent, FaXmark } from 'react-icons/fa6';
 import Search from './Search';
 import { navLinks } from '@/constants';
 
@@ -15,7 +15,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className='flex items-center px-4'>
+        <nav className='flex items-center px-4 select-none'>
             <div className='w-24 py-2 mr-3'>
                 <a className='block' href='/'>
                     <img src={'/logo.png'} alt='logo' />

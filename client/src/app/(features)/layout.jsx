@@ -2,11 +2,12 @@ import React from 'react';
 import Link from 'next/link';
 import { FaFacebook, FaGithub, FaInstagram } from 'react-icons/fa6';
 import Navbar from '@/components/Navbar';
+import ScrollToTopButton from '@/components/ScrollToTopButton';
 
 const MainLayout = ({ children }) => {
     const renderFooter = (
         <div className='border-t pt-4 mb-12 px-3 flex items-start gap-5 justify-center'>
-            <img src='./myLogo.png' alt='Logo' className='w-32' />
+            <img src='/myLogo.png' alt='Logo' className='w-32' />
             <div className='flex flex-col gap-2'>
                 <h5 className='text-xl font-semibold'>Contact</h5>
                 <div className='flex flex-col'>
@@ -48,6 +49,7 @@ const MainLayout = ({ children }) => {
         <div className='h-screen flex flex-col'>
             <Navbar />
             <main className='flex-1'>{children}</main>
+            <ScrollToTopButton />
             <footer>{renderFooter}</footer>
         </div>
     );

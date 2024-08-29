@@ -48,7 +48,10 @@ const TopRankedCard = ({ isTopThree, rankNumber, manga }) => {
     }
 
     return (
-        <div className='group flex flex-row items-center text-sm p-4 pb-2 opacity-80 hover:bg-black/5 hover:opacity-100 cursor-pointer'>
+        <div
+            className='group flex flex-row items-center text-sm p-4 pb-2 opacity-80 hover:bg-black/5 hover:opacity-100 cursor-pointer'
+            onClick={() => router.push(`/titles/${manga.id}`)}
+        >
             <div className='relative w-20'>
                 <img
                     className='h-28 min-w-[80px] block'
