@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { getAuthor, getChapter, getCover } from '@/api/modules';
 import { MANGADEX_COVERS_URL } from '@/constants';
 
-const MangaCard = ({ manga }) => {
+const MangaCard = ({ manga, rankNumber, isChapterAvailable = true }) => {
     const router = useRouter();
     const [coverImage, setCoverImage] = useState(null);
     const [authorNames, setAuthorNames] = useState('');
@@ -49,7 +49,7 @@ const MangaCard = ({ manga }) => {
 
     return (
         <div className='flex flex-col text-sm max-w-full'>
-            <div className='relative group cursor-pointer'>
+            <div className='relative group cursor-pointer' onClick={() => router.push(`/titles/${manga.id}`)}>
                 <div className='w-full aspect-2/3'>
                     <img
                         className='object-cover w-full h-full'
@@ -58,6 +58,14 @@ const MangaCard = ({ manga }) => {
                         }
                         alt={manga.attributes.title['en'] || Object.values(manga.attributes.title)[0]}
                     />
+                    {rankNumber && (
+                        <span className='absolute bg-black flex items-center justify-center rounded-full w-8 h-8 -top-3 left-1/2 -translate-x-1/2'>
+                            <span className='absolute inset-0 flex items-center justify-center'>
+                                <img src='/medal-96.png' alt='' className='w-7 h-7' />
+                            </span>
+                            <span className='relative text-xs font-black font-sans text-black'>{rankNumber}</span>
+                        </span>
+                    )}
                 </div>
                 <div className='absolute pt-7 overflow-hidden w-full h-[72px] bottom-0 px-2 leading-none bg-linear group-hover:h-20'>
                     <h4 className='line-clamp-1 font-semibold text-white group-hover:text-[#ffd600]'>
@@ -66,20 +74,25 @@ const MangaCard = ({ manga }) => {
                     <div className='mt-2 text-[10px] line-clamp-1 uppercase'>{authorNames}</div>
                 </div>
             </div>
-            <div
-                onClick={() => router.push('/')}
-                className='bg-linear-black px-2 pb-5 rounded-b-lg border-t bg-linear-red'
-            >
-                <p className='text-white font-semibold mt-2'>
-                    <span className='text-sm'>Chapter: </span>
-                    <span>
-                        #{latestChapter && latestChapter.attributes?.chapter ? latestChapter.attributes.chapter : 'N/A'}
-                    </span>
-                </p>
-                <p className='text-xs line-clamp-1'>
-                    {latestChapter && latestChapter.attributes.title ? latestChapter.attributes.title : '___'}
-                </p>
-            </div>
+            {isChapterAvailable && (
+                <div
+                    onClick={() => router.push('/')}
+                    className='bg-linear-black px-2 pb-5 rounded-b-lg border-t bg-linear-red'
+                >
+                    <p className='text-white font-semibold mt-2'>
+                        <span className='text-sm'>Chapter: </span>
+                        <span>
+                            #
+                            {latestChapter && latestChapter.attributes?.chapter
+                                ? latestChapter.attributes.chapter
+                                : 'N/A'}
+                        </span>
+                    </p>
+                    <p className='text-xs line-clamp-1'>
+                        {latestChapter && latestChapter.attributes.title ? latestChapter.attributes.title : '___'}
+                    </p>
+                </div>
+            )}
         </div>
     );
 };

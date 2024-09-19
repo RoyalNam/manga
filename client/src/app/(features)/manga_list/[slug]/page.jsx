@@ -149,7 +149,8 @@ const MangaListPage = () => {
                 )}
             </div>
             <div className='grid px-4 py-6 grid-cols-3 xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-4 gap-x-2 gap-y-3'>
-                {Array.isArray(mangaList) && mangaList.map((manga) => <MangaCard key={manga.id} manga={manga} />)}
+                {Array.isArray(mangaList) &&
+                    mangaList.map((manga) => <MangaCard key={manga.id} manga={manga} isChapterAvailable={false} />)}
             </div>
         </div>
     );

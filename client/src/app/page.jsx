@@ -48,54 +48,53 @@ const Home = () => {
         loadMangaData();
     }, []);
 
-    if (loading)
-        return (
-            <div>
-                <img src='/loading-96.png' alt='' className='mx-auto animate-spin' />
-            </div>
-        );
-
     return (
         <MainLayout>
-            <div className='flex'>
-                <div className='bg-[#131313] flex flex-col flex-1'>
-                    <div>
-                        <SectionTitle title='Daily Updates' bgLinear to={mangaListPaths.update} />
-                        <div className='grid px-4 py-6 grid-cols-3 xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-4 gap-x-2 gap-y-3'>
-                            {Array.isArray(updateMangaList) &&
-                                updateMangaList.map((manga) => <MangaCard key={manga.id} manga={manga} />)}
+            {loading ? (
+                <div>
+                    <img src='/loading-96.png' alt='' className='mx-auto animate-spin' />
+                </div>
+            ) : (
+                <div className='flex'>
+                    <div className='bg-[#131313] flex flex-col flex-1'>
+                        <div>
+                            <SectionTitle title='Daily Updates' bgLinear to={mangaListPaths.update} />
+                            <div className='grid px-4 py-6 grid-cols-3 xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-4 gap-x-2 gap-y-3'>
+                                {Array.isArray(updateMangaList) &&
+                                    updateMangaList.map((manga) => <MangaCard key={manga.id} manga={manga} />)}
+                            </div>
+                        </div>
+                        <div>
+                            <SectionTitle title='Completed' bgLinear to={mangaListPaths.completed} />
+                            <div className='grid px-4 py-6 grid-cols-3 xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-4 gap-x-2 gap-y-3'>
+                                {Array.isArray(completeMangaList) &&
+                                    completeMangaList.map((manga) => <MangaCard key={manga.id} manga={manga} />)}
+                            </div>
+                        </div>
+                        <div>
+                            <SectionTitle title='New' bgLinear to={mangaListPaths.new} />
+                            <div className='grid px-4 py-6 grid-cols-3 xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-4 gap-x-2 gap-y-3'>
+                                {Array.isArray(newMangaList) &&
+                                    newMangaList.map((manga) => <MangaCard key={manga.id} manga={manga} />)}
+                            </div>
                         </div>
                     </div>
-                    <div>
-                        <SectionTitle title='Completed' bgLinear to={mangaListPaths.completed} />
-                        <div className='grid px-4 py-6 grid-cols-3 xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-4 gap-x-2 gap-y-3'>
-                            {Array.isArray(completeMangaList) &&
-                                completeMangaList.map((manga) => <MangaCard key={manga.id} manga={manga} />)}
-                        </div>
-                    </div>
-                    <div>
-                        <SectionTitle title='New' bgLinear to={mangaListPaths.new} />
-                        <div className='grid px-4 py-6 grid-cols-3 xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-4 gap-x-2 gap-y-3'>
-                            {Array.isArray(newMangaList) &&
-                                newMangaList.map((manga) => <MangaCard key={manga.id} manga={manga} />)}
+                    <div className='hidden md:block md:w-[35%] xl:w-[25%] ml-4'>
+                        <SectionTitle title='Hottest' bgRedLinear to={paths.ranking} />
+                        <div className='flex flex-col bg-[#5d0914] max-w-full overflow-hidden'>
+                            {Array.isArray(topMangaList) &&
+                                topMangaList.map((manga, index) => (
+                                    <TopRankedCard
+                                        key={manga.id}
+                                        isTopThree={index < 3}
+                                        rankNumber={index + 1}
+                                        manga={manga}
+                                    />
+                                ))}
                         </div>
                     </div>
                 </div>
-                <div className='hidden md:block md:w-[35%] xl:w-[25%] ml-4'>
-                    <SectionTitle title='Hottest' bgRedLinear to={paths.ranking} />
-                    <div className='flex flex-col bg-[#5d0914] max-w-full overflow-hidden'>
-                        {Array.isArray(topMangaList) &&
-                            topMangaList.map((manga, index) => (
-                                <TopRankedCard
-                                    key={manga.id}
-                                    isTopThree={index < 3}
-                                    rankNumber={index + 1}
-                                    manga={manga}
-                                />
-                            ))}
-                    </div>
-                </div>
-            </div>
+            )}
         </MainLayout>
     );
 };

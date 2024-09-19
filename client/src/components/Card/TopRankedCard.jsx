@@ -49,7 +49,7 @@ const TopRankedCard = ({ isTopThree, rankNumber, manga }) => {
 
     return (
         <div
-            className='group flex flex-row items-center text-sm p-4 pb-2 opacity-80 hover:bg-black/5 hover:opacity-100 cursor-pointer'
+            className='group flex flex-row items-center text-sm p-4 pb-2 hover:bg-white/10 cursor-pointer'
             onClick={() => router.push(`/titles/${manga.id}`)}
         >
             <div className='relative w-20'>
@@ -60,8 +60,8 @@ const TopRankedCard = ({ isTopThree, rankNumber, manga }) => {
                 />
                 <span className='absolute bg-black text-white flex items-center justify-center rounded-full w-[30px] h-[30px] -top-3 left-1/2 -translate-x-1/2'>
                     {isTopThree && (
-                        <span className='absolute text-active top-2/4 -translate-y-1/2 left-1/2 -translate-x-1/2 text-xl'>
-                            <FaStar />
+                        <span className='absolute inset-0 flex items-center justify-center'>
+                            <img src='/medal-96.png' alt='' className='w-7 h-7' />
                         </span>
                     )}
                     <span className='relative text-xs font-semibold'>{rankNumber}</span>

@@ -139,7 +139,7 @@ const Title = () => {
                                             className={`${
                                                 false && 'text-[#ffd600]'
                                             } bg-black  px-3 hover:text-[#ffd600] py-1 text-sm rounded-full`}
-                                            onClick={() => router.push(`/${chapter.id}`)}
+                                            onClick={() => router.push(`/viewer/${chapter.id}`)}
                                         >
                                             {`Chapter ${chapter.chapter}`}
                                         </button>
