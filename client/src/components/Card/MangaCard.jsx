@@ -43,11 +43,25 @@ const MangaCard = ({ manga, rankNumber, isChapterAvailable = true }) => {
         loadMangaData();
     }, [manga]);
 
-    if (loading) {
-        return <div className='shadow-white/35 shadow-sm rounded aspect-2/3 animate-pulse' />;
-    }
+    const renderPlaceholder = () => (
+        <div className='flex flex-col text-sm max-w-full animate-pulse'>
+            <div className='relative group cursor-pointer'>
+                <div className='w-full aspect-2/3 bg-[#212121]'></div>
+                <div className='absolute pt-7 overflow-hidden w-full h-[72px] bottom-0 px-2 leading-none bg-gradient-to-t from-black'>
+                    <div className='bg-[#3c3c3c] rounded-full h-4 w-3/4 mb-2'></div>
+                    <div className='bg-[#3c3c3c] rounded-full h-3 w-1/2'></div>
+                </div>
+            </div>
+            {isChapterAvailable && (
+                <div className='bg-[#212121] px-2 pb-2 rounded-b-lg border-t border-white/30'>
+                    <p className='bg-[#3c3c3c] rounded-full mt-2 h-4 w-3/4 inline-block'></p>
+                    <p className='bg-[#3c3c3c] rounded-full h-3 w-1/2 mt-1 inline-block'></p>
+                </div>
+            )}
+        </div>
+    );
 
-    return (
+    const renderContent = () => (
         <div className='flex flex-col text-sm max-w-full'>
             <div className='relative group cursor-pointer' onClick={() => router.push(`/titles/${manga.id}`)}>
                 <div className='w-full aspect-2/3'>
@@ -77,7 +91,7 @@ const MangaCard = ({ manga, rankNumber, isChapterAvailable = true }) => {
             {isChapterAvailable && (
                 <div
                     onClick={() => router.push('/')}
-                    className='bg-linear-black px-2 pb-5 rounded-b-lg border-t bg-linear-red'
+                    className='bg-linear-black px-2 pb-2 rounded-b-lg border-t bg-linear-red'
                 >
                     <p className='text-white font-semibold mt-2'>
                         <span className='text-sm'>Chapter: </span>
@@ -95,6 +109,8 @@ const MangaCard = ({ manga, rankNumber, isChapterAvailable = true }) => {
             )}
         </div>
     );
+
+    return loading ? renderPlaceholder() : renderContent();
 };
 
 export default MangaCard;

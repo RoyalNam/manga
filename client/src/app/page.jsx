@@ -81,7 +81,7 @@ const Home = () => {
                     </div>
                     <div className='hidden md:block md:w-[35%] xl:w-[25%] ml-4'>
                         <SectionTitle title='Hottest' bgRedLinear to={paths.ranking} />
-                        <div className='flex flex-col bg-[#5d0914] max-w-full overflow-hidden'>
+                        <div className='flex flex-col bg-[#5d0914] gap-0.5 max-w-full overflow-hidden'>
                             {Array.isArray(topMangaList) &&
                                 topMangaList.map((manga, index) => (
                                     <TopRankedCard

@@ -107,7 +107,10 @@ const Title = () => {
                                 </pre>
                             </div>
                             <div className='md:px-4 hover:opacity-75'>
-                                <button className='bg-[#ffd600] w-full min-w-[150px] md:w-auto text-black rounded-lg font-semibold text-lg px-4 py-3'>
+                                <button
+                                    className='bg-[#ffd600] w-full min-w-[150px] md:w-auto text-black rounded-lg font-semibold text-lg px-4 py-3'
+                                    onClick={() => router.push(`${mangaId}/viewer/${chapters[0][0].id}`)}
+                                >
                                     Read Now
                                 </button>
                             </div>

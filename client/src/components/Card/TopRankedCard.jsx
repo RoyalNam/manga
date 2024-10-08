@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { FaStar } from 'react-icons/fa6';
 import { MANGADEX_COVERS_URL } from '@/constants';
 import { getAuthor, getCover } from '@/api/modules';
 
@@ -38,16 +37,24 @@ const TopRankedCard = ({ isTopThree, rankNumber, manga }) => {
         loadMangaData();
     }, [manga]);
 
-    if (loading) {
-        return (
-            <div className='w-full flex gap-1 mt-4 mb-2 ml-4 animate-pulse'>
-                <div className='shadow-white/45 shadow-sm rounded h-28 w-[80px]' />
-                <div className='shadow-white/45 shadow-sm rounded h-28 flex-1' />
+    const renderPlaceholder = () => (
+        <div className='group flex flex-row items-center text-sm p-4 pb-2 animate-pulse bg-[#212121]'>
+            <div className='relative w-20'>
+                <div className='h-28 min-w-[80px] bg-[#3c3c3c]'></div>
+                <span className='absolute bg-black text-white flex items-center justify-center rounded-full w-[30px] h-[30px] -top-3 left-1/2 -translate-x-1/2'>
+                    <div className='bg-[#3c3c3c] h-5 w-5 rounded-full'></div>
+                </span>
             </div>
-        );
-    }
+            <div className='flex-1 flex flex-col ml-3'>
+                <div className='leading-4'>
+                    <div className='bg-[#3c3c3c] rounded-full h-5 w-3/4 mb-1 inline-block'></div>
+                    <div className='bg-[#3c3c3c] rounded-full h-3 w-1/2 inline-block'></div>
+                </div>
+            </div>
+        </div>
+    );
 
-    return (
+    const renderContent = () => (
         <div
             className='group flex flex-row items-center text-sm p-4 pb-2 hover:bg-white/10 cursor-pointer'
             onClick={() => router.push(`/titles/${manga.id}`)}
@@ -77,6 +84,8 @@ const TopRankedCard = ({ isTopThree, rankNumber, manga }) => {
             </div>
         </div>
     );
+
+    return loading ? renderPlaceholder() : renderContent();
 };
 
 export default TopRankedCard;
