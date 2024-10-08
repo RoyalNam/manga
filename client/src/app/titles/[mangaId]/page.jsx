@@ -5,6 +5,7 @@ import { FaBookOpen } from 'react-icons/fa6';
 import { getAuthor, getCover } from '@/api/modules';
 import { mangaApi } from '@/api/modules/manga';
 import { MANGADEX_COVERS_URL } from '@/constants';
+import MainLayout from '@/app/(features)/layout';
 
 const Title = () => {
     const router = useRouter();
@@ -40,6 +41,7 @@ const Title = () => {
 
                 const chapterData = await mangaApi.getChapters(mangaId);
                 const allChapters = [];
+                console.log('chapterData', chapterData);
 
                 for (const volume of Object.values(chapterData.volumes)) {
                     const chapters = Object.values(volume.chapters);
@@ -74,7 +76,7 @@ const Title = () => {
 
     return (
         manga && (
-            <>
+            <MainLayout>
                 <div className='mb-11'>
                     <div className='flex flex-col md:flex-row gap-6 px-5 pt-12 pb-6'>
                         <div className='mx-auto min-w-[250px] max-w-[270px] min-h-[375px] max-h-[405px]'>
@@ -139,7 +141,7 @@ const Title = () => {
                                             className={`${
                                                 false && 'text-[#ffd600]'
                                             } bg-black  px-3 hover:text-[#ffd600] py-1 text-sm rounded-full`}
-                                            onClick={() => router.push(`/viewer/${chapter.id}`)}
+                                            onClick={() => router.push(`${mangaId}/viewer/${chapter.id}`)}
                                         >
                                             {`Chapter ${chapter.chapter}`}
                                         </button>
@@ -148,7 +150,7 @@ const Title = () => {
                         </div>
                     </div>
                 </div>
-            </>
+            </MainLayout>
         )
     );
 };

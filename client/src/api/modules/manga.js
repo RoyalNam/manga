@@ -19,17 +19,8 @@ export const mangaApi = {
             return null;
         }
     },
-    getMangaDetails: (mangaId) => fetchData(mangaEndpoints.getMangaDetails, mangaId),
+    getMangaDetails: (mangaId) => fetchData(mangaEndpoints.getMangaDetails, true, mangaId),
     getRandomManga: () => fetchData(mangaEndpoints.getRandomManga),
-    // getChapters: (mangaId) => fetchData(mangaEndpoints.getChapters, mangaId),
+    getChapters: (mangaId) => fetchData(mangaEndpoints.getChapters, false, mangaId),
     getTag: () => fetchData(mangaEndpoints.getTag),
-    getChapters: async (mangaId) => {
-        try {
-            const response = await publicClient.get(mangaEndpoints.getChapters(mangaId));
-            return response.data;
-        } catch (error) {
-            console.error('Error fetching manga list:', error);
-            return null;
-        }
-    },
 };
